@@ -22,4 +22,11 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async () => {
   return { hello: 'world' }
-})
+});
+
+Route.group(() => {
+  Route.post("crud/create", "CrudController.createResource")
+  Route.delete("crud/delete", "CrudController.deleteResource")
+  Route.patch("crud/ ", "CrudController.updateResource")
+  Route.get("crud/list", "CrudController.listResource")
+}).prefix('api');
