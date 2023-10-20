@@ -26,7 +26,7 @@ Route.get('/', async () => {
 
 Route.group(() => {
   Route.post("crud/create", "CrudController.createResource")
-  Route.delete("crud/delete", "CrudController.deleteResource")
-  Route.patch("crud/ ", "CrudController.updateResource")
-  Route.get("crud/list", "CrudController.listResource")
+  Route.delete("crud/delete/:id ", "CrudController.deleteResource")
+  Route.patch("crud/update/:id", "CrudController.updateResource")
+  Route.get("crud/list/:id", "CrudController.listResource")
 }).prefix('api');
