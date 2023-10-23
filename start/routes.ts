@@ -24,6 +24,7 @@ Route.get('/', async () => {
   return { hello: 'world' }
 });
 
+
 Route.group(() => {
   Route.post("crud/create", "CrudController.createResource")
   Route.delete("crud/delete/:id ", "CrudController.deleteResource")
