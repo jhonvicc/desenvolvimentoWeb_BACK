@@ -15,11 +15,7 @@ export default class CrudController {
     }
 
     listResource(request: HttpContextContract) {
-        if (request.request.body().where) {   
-            return this._getModel(request.request).listItem(request.request.params().id, request.request.body().where);
-        }
         return this._getModel(request.request).listItem(request.request.params().id);
-
     }
 
     private _getModel(request): Base {

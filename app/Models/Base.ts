@@ -1,3 +1,4 @@
+
 import Database from "@ioc:Adonis/Lucid/Database";
 
 export default class Base {
@@ -8,7 +9,9 @@ export default class Base {
     ) {}
 
     async createItem(item) {
-        return await Database.table(this.table).insert(item).returning(this.IdField);
+        let id;
+        [id]= await Database.table(this.table).insert(item).returning(this.IdField);
+        return this.getEntity(id[this.IdField]);
     }
 
     async updateItem(id, item) {
@@ -19,16 +22,24 @@ export default class Base {
         return await Database.from(this.table).delete().where(this.IdField, id);
     }
     
-    async listItem(id, where = "") {
-        let list = Database.from(this.table);
-        if (where != "") {
-            list.whereRaw(where);
-        }
+    async listItem(id) {
+        let list;
         if (id !== "all") {
-            list.where(this.IdField, id);
-            return await list.first();
+            list = this.getEntity(id);
         }
+        else {
+            list = this.listScope();
+        }
+    
         return await list;
     }
+
+    async getEntity(id: number) {
+        return await Database.from(this.table).where(this.IdField, id).first();
+    }
+
+    async listScope() {
+        return await Database.from(this.table);
+    } 
 }
 

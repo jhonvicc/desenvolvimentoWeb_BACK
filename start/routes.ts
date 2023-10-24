@@ -29,5 +29,5 @@ Route.group(() => {
   Route.post("crud/create", "CrudController.createResource")
   Route.delete("crud/delete/:id ", "CrudController.deleteResource")
   Route.patch("crud/update/:id", "CrudController.updateResource")
-  Route.get("crud/list/:id", "CrudController.listResource")
+  Route.get("crud/list/:id/:where?", "CrudController.listResource")
 }).prefix('api');
