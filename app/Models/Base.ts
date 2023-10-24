@@ -33,7 +33,7 @@ export default class Base {
     
         return await list;
     }
-
+ 
     async getEntity(id: number) {
         return await Database.from(this.table).where(this.IdField, id).first();
     }
